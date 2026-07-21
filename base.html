@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if animal else 'Novo' }} Animal{% endblock %}
+
+{% block conteudo %}
+  <h1 class="h3 mb-3">{{ 'Editar' if animal else 'Novo' }} animal</h1>
+
+  <form method="POST" class="bg-white p-4 rounded shadow-sm">
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nome *</label>
+        <input type="text" name="nome" class="form-control" required
+               value="{{ animal.nome if animal else '' }}">
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Espécie *</label>
+        <select name="especie" class="form-select" required>
+          {% for opcao in ['cão', 'gato', 'outro'] %}
+            <option value="{{ opcao }}" {{ 'selected' if animal and animal.especie == opcao else '' }}>{{ opcao }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Sexo</label>
+        <select name="sexo" class="form-select">
+          <option value="">-</option>
+          {% for opcao in ['macho', 'fêmea'] %}
+            <option value="{{ opcao }}" {{ 'selected' if animal and animal.sexo == opcao else '' }}>{{ opcao }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Raça</label>
+        <input type="text" name="raca" class="form-control" value="{{ animal.raca if animal else '' }}">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Porte</label>
+        <select name="porte" class="form-select">
+          <option value="">-</option>
+          {% for opcao in ['pequeno', 'médio', 'grande'] %}
+            <option value="{{ opcao }}" {{ 'selected' if animal and animal.porte == opcao else '' }}>{{ opcao }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Cor</label>
+        <input type="text" name="cor" class="form-control" value="{{ animal.cor if animal else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Idade aproximada</label>
+        <input type="text" name="idade_aproximada" class="form-control"
+               placeholder="ex: 2 anos, filhote" value="{{ animal.idade_aproximada if animal else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Status</label>
+        <select name="status" class="form-select">
+          {% for opcao in ['resgatado', 'em_tratamento', 'disponivel', 'adotado', 'obito'] %}
+            <option value="{{ opcao }}" {{ 'selected' if animal and animal.status == opcao else ('selected' if not animal and opcao == 'resgatado' else '') }}>
+              {{ opcao.replace('_', ' ') }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descrição</label>
+        <textarea name="descricao" class="form-control" rows="3">{{ animal.descricao if animal else '' }}</textarea>
+      </div>
+
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{{ url_for('listar_animais') }}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

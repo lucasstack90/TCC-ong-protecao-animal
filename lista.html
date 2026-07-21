@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block titulo %}{{ animal.nome }}{% endblock %}
+
+{% block conteudo %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3">{{ animal.nome }}</h1>
+    <div>
+      <a href="{{ url_for('editar_animal', animal_id=animal.id) }}" class="btn btn-outline-primary">Editar</a>
+      <a href="{{ url_for('listar_animais') }}" class="btn btn-outline-secondary">Voltar</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <p><strong>Espécie:</strong> {{ animal.especie }}</p>
+          <p><strong>Raça:</strong> {{ animal.raca or '-' }}</p>
+          <p><strong>Sexo:</strong> {{ animal.sexo or '-' }}</p>
+          <p><strong>Porte:</strong> {{ animal.porte or '-' }}</p>
+          <p><strong>Cor:</strong> {{ animal.cor or '-' }}</p>
+          <p><strong>Idade aproximada:</strong> {{ animal.idade_aproximada or '-' }}</p>
+          <p><strong>Status atual:</strong> <span class="badge bg-secondary">{{ animal.status.replace('_', ' ') }}</span></p>
+          <p><strong>Descrição:</strong><br>{{ animal.descricao or '-' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="h5">Histórico de status</h2>
+      {% if animal.historico %}
+        <ul class="list-group">
+          {% for h in animal.historico|sort(attribute='data_mudanca', reverse=True) %}
+            <li class="list-group-item">
+              <strong>{{ h.status_anterior or 'cadastro' }} → {{ h.status_novo }}</strong><br>
+              <small class="text-muted">{{ h.data_mudanca.strftime('%d/%m/%Y %H:%M') }}</small>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">Nenhuma mudança de status registrada ainda.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
