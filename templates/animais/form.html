@@ -4,22 +4,8 @@
 {% block conteudo %}
   <h1 class="h3 mb-3">{{ 'Editar' if animal else 'Novo' }} animal</h1>
 
-  <form method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm">
+  <form method="POST" class="bg-white p-4 rounded shadow-sm">
     <div class="row g-3">
-
-      {% if animal and animal.foto_url %}
-        <div class="col-12">
-          <label class="form-label d-block">Foto atual</label>
-          <img src="{{ url_for('static', filename=animal.foto_url) }}" alt="Foto de {{ animal.nome }}"
-               class="rounded mb-2" style="max-height: 160px;">
-        </div>
-      {% endif %}
-
-      <div class="col-md-6">
-        <label class="form-label">Foto (opcional)</label>
-        <input type="file" name="foto" class="form-control" accept="image/png, image/jpeg, image/webp">
-        <div class="form-text">{{ 'Enviar uma nova foto substitui a atual.' if animal else 'Formatos aceitos: PNG, JPG ou WEBP.' }}</div>
-      </div>
 
       <div class="col-md-6">
         <label class="form-label">Nome *</label>

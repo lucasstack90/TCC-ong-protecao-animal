@@ -13,10 +13,6 @@
   <div class="row">
     <div class="col-md-6">
       <div class="card mb-4">
-        {% if animal.foto_url %}
-          <img src="{{ url_for('static', filename=animal.foto_url) }}" alt="Foto de {{ animal.nome }}"
-               class="card-img-top" style="max-height: 320px; object-fit: cover;">
-        {% endif %}
         <div class="card-body">
           <p><strong>Espécie:</strong> {{ animal.especie }}</p>
           <p><strong>Raça:</strong> {{ animal.raca or '-' }}</p>
