@@ -57,22 +57,6 @@ Desenvolver uma aplicação web que permita o gerenciamento das principais ativi
 * Git
 * GitHub
 * Visual Studio Code
-* Figma
-
-## 📂 Estrutura do Projeto
-```text
-sistema-ongs-protecao-animal
-├── assets/
-│   ├── css/
-│   ├── js/
-│   └── img/
-├── pages/
-├── components/
-├── database/
-├── docs/
-├── index.php
-└── README.md
-```
 
 ## 📈 Status do Projeto
 Atualmente o sistema encontra-se em desenvolvimento.
