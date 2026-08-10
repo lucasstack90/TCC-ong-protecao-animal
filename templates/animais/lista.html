@@ -6,28 +6,25 @@
     <h1 class="h3">Animais</h1>
     <a href="{{ url_for('novo_animal') }}" class="btn btn-primary">+ Novo animal</a>
   </div>
-
   {% if animais %}
     <table class="table table-striped bg-white">
       <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Espécie</th>
-          <th>Porte</th>
-          <th>Status</th>
-          <th>Cadastrado em</th>
-          <th></th>
-        </tr>
+        <tr><th></th><th>Nome</th><th>Espécie</th><th>Porte</th><th>Status</th><th>Cadastrado em</th><th></th></tr>
       </thead>
       <tbody>
         {% for animal in animais %}
           <tr>
+            <td style="width: 56px;">
+              {% if animal.foto_url %}
+                <img src="{{ url_for('static', filename=animal.foto_url) }}" alt="{{ animal.nome }}" class="rounded" style="width: 48px; height: 48px; object-fit: cover;">
+              {% else %}
+                <div class="rounded bg-secondary-subtle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.2rem;">🐾</div>
+              {% endif %}
+            </td>
             <td>{{ animal.nome }}</td>
             <td>{{ animal.especie }}</td>
             <td>{{ animal.porte or '-' }}</td>
-            <td>
-              <span class="badge bg-secondary">{{ animal.status.replace('_', ' ') }}</span>
-            </td>
+            <td><span class="badge bg-secondary">{{ animal.status.replace('_', ' ') }}</span></td>
             <td>{{ animal.data_cadastro.strftime('%d/%m/%Y') }}</td>
             <td class="text-end">
               <a href="{{ url_for('detalhe_animal', animal_id=animal.id) }}" class="btn btn-sm btn-outline-secondary">Ver</a>

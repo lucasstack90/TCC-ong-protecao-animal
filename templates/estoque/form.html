@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if item else 'Novo' }} Item de Estoque{% endblock %}
+
+{% block conteudo %}
+  <h1 class="h3 mb-3">{{ 'Editar' if item else 'Novo' }} item de estoque</h1>
+
+  <form method="POST" class="bg-white p-4 rounded shadow-sm">
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nome do item *</label>
+        <input type="text" name="nome" class="form-control" required
+               placeholder="ex: Ração premium adulto"
+               value="{{ item.nome if item else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Categoria</label>
+        <select name="categoria" class="form-select">
+          {% for opcao in ['racao_cao', 'racao_gato', 'medicamento', 'higiene', 'outro'] %}
+            <option value="{{ opcao }}" {{ 'selected' if item and item.categoria == opcao else '' }}>{{ opcao.replace('_', ' ') }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Quantidade atual *</label>
+        <input type="number" step="0.01" name="quantidade" class="form-control" required
+               value="{{ item.quantidade if item else '0' }}">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Unidade</label>
+        <select name="unidade" class="form-select">
+          {% for opcao in ['kg', 'un', 'L', 'caixa', 'pacote'] %}
+            <option value="{{ opcao }}" {{ 'selected' if item and item.unidade == opcao else '' }}>{{ opcao }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Quantidade mínima (alerta)</label>
+        <input type="number" step="0.01" name="quantidade_minima" class="form-control"
+               value="{{ item.quantidade_minima if item else '0' }}">
+        <div class="form-text">Abaixo desse valor, o item aparece destacado na listagem.</div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Observações</label>
+        <textarea name="observacoes" class="form-control" rows="2">{{ item.observacoes if item else '' }}</textarea>
+      </div>
+
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{{ url_for('listar_estoque') }}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

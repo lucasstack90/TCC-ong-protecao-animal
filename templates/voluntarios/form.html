@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if pessoa else 'Novo' }} membro da equipe{% endblock %}
+
+{% block conteudo %}
+  <h1 class="h3 mb-3">{{ 'Editar' if pessoa else 'Novo' }} membro da equipe</h1>
+
+  <form method="POST" class="bg-white p-4 rounded shadow-sm">
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nome *</label>
+        <input type="text" name="nome" class="form-control" required
+               value="{{ pessoa.nome if pessoa else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Tipo de acesso *</label>
+        <select name="tipo" class="form-select" required>
+          {% for opcao in ['funcionario', 'voluntario', 'admin'] %}
+            <option value="{{ opcao }}" {{ 'selected' if pessoa and pessoa.tipo == opcao else '' }}>{{ opcao }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Email (login) *</label>
+        <input type="email" name="email" class="form-control" required
+               value="{{ pessoa.email if pessoa else '' }}" {{ 'readonly' if pessoa else '' }}>
+        {% if pessoa %}<div class="form-text">O email de login não pode ser alterado por aqui.</div>{% endif %}
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">{{ 'Nova senha (deixe em branco para manter a atual)' if pessoa else 'Senha' }}</label>
+        <input type="password" name="senha" class="form-control"
+               placeholder="{{ '' if pessoa else 'Padrão: 123456 se deixar em branco' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">CPF</label>
+        <input type="text" name="cpf" class="form-control" value="{{ pessoa.cpf if pessoa else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Telefone</label>
+        <input type="text" name="telefone" class="form-control" value="{{ pessoa.telefone if pessoa else '' }}">
+      </div>
+
+      <div class="col-md-12">
+        <label class="form-label">Área de atuação</label>
+        <input type="text" name="area_atuacao" class="form-control"
+               placeholder="ex: resgate, transporte, divulgação, administrativo"
+               value="{{ pessoa.area_atuacao if pessoa else '' }}">
+      </div>
+
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{{ url_for('listar_voluntarios') }}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}
