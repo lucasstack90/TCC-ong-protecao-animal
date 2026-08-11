@@ -25,7 +25,7 @@ app.secret_key = 'troque-esta-chave-antes-de-colocar-em-producao'
 # IMPORTANTE: o banco 'ong_sistema' precisa já existir no phpMyAdmin
 # antes de rodar esse arquivo (o SQLAlchemy cria as TABELAS, mas não
 # cria o banco de dados em si).
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/ong_sistema'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://ong_user:ong_senha123@localhost/ong_sistema'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
