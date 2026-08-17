@@ -48,7 +48,7 @@ Desenvolver uma aplicação web que permita o gerenciamento das principais ativi
 * Bootstrap
 
 ### Back-end
-* PHP
+* Python
 
 ### Banco de Dados
 * MySQL
