@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if voluntario else 'Novo' }} Voluntário{% endblock %}
+
+{% block conteudo %}
+  <h1 class="h3 mb-3">{{ 'Editar' if voluntario else 'Novo' }} voluntário</h1>
+
+  <form method="POST" class="bg-white p-4 rounded shadow-sm">
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nome *</label>
+        <input type="text" name="nome" class="form-control" required
+               value="{{ voluntario.nome if voluntario else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">CPF</label>
+        <input type="text" name="cpf" class="form-control"
+               value="{{ voluntario.cpf if voluntario else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Telefone</label>
+        <input type="text" name="telefone" class="form-control"
+               value="{{ voluntario.telefone if voluntario else '' }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control"
+               value="{{ voluntario.email if voluntario else '' }}">
+      </div>
+
+      <div class="col-md-12">
+        <label class="form-label">Área de atuação</label>
+        <input type="text" name="area_atuacao" class="form-control"
+               placeholder="ex: resgate, transporte, divulgação"
+               value="{{ voluntario.area_atuacao if voluntario else '' }}">
+      </div>
+
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{{ url_for('listar_voluntarios') }}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

@@ -13,7 +13,7 @@ Nas próximas etapas vamos adicionar as ROTAS (páginas/URLs) do sistema.
 """
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-from models import db, Animal, HistoricoAnimal
+from models import db, Animal, HistoricoAnimal, Voluntario, Adotante, Doador
 
 app = Flask(__name__)
 app.secret_key = 'troque-esta-chave-antes-de-colocar-em-producao'  # necessário para usar flash()
@@ -123,6 +123,162 @@ def editar_animal(animal_id):
         return redirect(url_for('detalhe_animal', animal_id=animal.id))
 
     return render_template('animais/form.html', animal=animal)
+
+
+# ----------------------------------------------------------------------
+# ROTAS DE VOLUNTÁRIOS
+# ----------------------------------------------------------------------
+# Segue exatamente o mesmo padrão das rotas de Animal acima.
+
+@app.route('/voluntarios')
+def listar_voluntarios():
+    # Mostra primeiro os voluntários ativos, depois os inativos, mais recentes primeiro
+    voluntarios = Voluntario.query.order_by(
+        Voluntario.ativo.desc(), Voluntario.data_cadastro.desc()
+    ).all()
+    return render_template('voluntarios/lista.html', voluntarios=voluntarios)
+
+
+@app.route('/voluntarios/novo', methods=['GET', 'POST'])
+def novo_voluntario():
+    if request.method == 'POST':
+        voluntario = Voluntario(
+            nome=request.form['nome'],
+            cpf=request.form.get('cpf'),
+            telefone=request.form.get('telefone'),
+            email=request.form.get('email'),
+            area_atuacao=request.form.get('area_atuacao'),
+        )
+        db.session.add(voluntario)
+        db.session.commit()
+        flash('Voluntário cadastrado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_voluntarios'))
+
+    # Se for GET, só mostra o formulário vazio
+    return render_template('voluntarios/form.html', voluntario=None)
+
+
+@app.route('/voluntarios/<int:voluntario_id>/editar', methods=['GET', 'POST'])
+def editar_voluntario(voluntario_id):
+    voluntario = Voluntario.query.get_or_404(voluntario_id)
+
+    if request.method == 'POST':
+        voluntario.nome = request.form['nome']
+        voluntario.cpf = request.form.get('cpf')
+        voluntario.telefone = request.form.get('telefone')
+        voluntario.email = request.form.get('email')
+        voluntario.area_atuacao = request.form.get('area_atuacao')
+
+        db.session.commit()
+        flash('Voluntário atualizado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_voluntarios'))
+
+    return render_template('voluntarios/form.html', voluntario=voluntario)
+
+
+@app.route('/voluntarios/<int:voluntario_id>/alternar-status', methods=['POST'])
+def alternar_status_voluntario(voluntario_id):
+    # Em vez de apagar o voluntário do banco (o que perderia o histórico),
+    # a gente só liga/desliga o campo 'ativo'. Isso é uma prática comum
+    # chamada de "soft delete".
+    voluntario = Voluntario.query.get_or_404(voluntario_id)
+    voluntario.ativo = not voluntario.ativo
+    db.session.commit()
+
+    mensagem = 'Voluntário reativado!' if voluntario.ativo else 'Voluntário marcado como inativo.'
+    flash(mensagem, 'sucesso')
+    return redirect(url_for('listar_voluntarios'))
+
+
+# ----------------------------------------------------------------------
+# ROTAS DE ADOTANTES
+# ----------------------------------------------------------------------
+# Pessoas interessadas em adotar. Mesmo padrão de sempre.
+
+@app.route('/adotantes')
+def listar_adotantes():
+    adotantes = Adotante.query.order_by(Adotante.nome).all()
+    return render_template('adotantes/lista.html', adotantes=adotantes)
+
+
+@app.route('/adotantes/novo', methods=['GET', 'POST'])
+def novo_adotante():
+    if request.method == 'POST':
+        adotante = Adotante(
+            nome=request.form['nome'],
+            cpf=request.form.get('cpf'),
+            telefone=request.form.get('telefone'),
+            email=request.form.get('email'),
+            endereco=request.form.get('endereco'),
+        )
+        db.session.add(adotante)
+        db.session.commit()
+        flash('Adotante cadastrado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_adotantes'))
+
+    return render_template('adotantes/form.html', adotante=None)
+
+
+@app.route('/adotantes/<int:adotante_id>/editar', methods=['GET', 'POST'])
+def editar_adotante(adotante_id):
+    adotante = Adotante.query.get_or_404(adotante_id)
+
+    if request.method == 'POST':
+        adotante.nome = request.form['nome']
+        adotante.cpf = request.form.get('cpf')
+        adotante.telefone = request.form.get('telefone')
+        adotante.email = request.form.get('email')
+        adotante.endereco = request.form.get('endereco')
+
+        db.session.commit()
+        flash('Adotante atualizado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_adotantes'))
+
+    return render_template('adotantes/form.html', adotante=adotante)
+
+
+# ----------------------------------------------------------------------
+# ROTAS DE DOADORES
+# ----------------------------------------------------------------------
+
+@app.route('/doadores')
+def listar_doadores():
+    doadores = Doador.query.order_by(Doador.nome).all()
+    return render_template('doadores/lista.html', doadores=doadores)
+
+
+@app.route('/doadores/novo', methods=['GET', 'POST'])
+def novo_doador():
+    if request.method == 'POST':
+        doador = Doador(
+            nome=request.form['nome'],
+            cpf_cnpj=request.form.get('cpf_cnpj'),
+            telefone=request.form.get('telefone'),
+            email=request.form.get('email'),
+        )
+        db.session.add(doador)
+        db.session.commit()
+        flash('Doador cadastrado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_doadores'))
+
+    return render_template('doadores/form.html', doador=None)
+
+
+@app.route('/doadores/<int:doador_id>/editar', methods=['GET', 'POST'])
+def editar_doador(doador_id):
+    doador = Doador.query.get_or_404(doador_id)
+
+    if request.method == 'POST':
+        doador.nome = request.form['nome']
+        doador.cpf_cnpj = request.form.get('cpf_cnpj')
+        doador.telefone = request.form.get('telefone')
+        doador.email = request.form.get('email')
+
+        db.session.commit()
+        flash('Doador atualizado com sucesso!', 'sucesso')
+        return redirect(url_for('listar_doadores'))
+
+    return render_template('doadores/form.html', doador=doador)
 
 
 if __name__ == '__main__':
