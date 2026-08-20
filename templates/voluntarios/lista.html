@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titulo %}Equipe{% endblock %}
+
+{% block conteudo %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3">Equipe (funcionários e voluntários)</h1>
+    <a href="{{ url_for('novo_voluntario') }}" class="btn btn-primary">+ Novo membro</a>
+  </div>
+
+  {% if pessoas %}
+    <table class="table table-striped bg-white">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Área de atuação</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pessoa in pessoas %}
+          <tr class="{{ '' if pessoa.ativo else 'text-muted' }}">
+            <td>{{ pessoa.nome }}</td>
+            <td><span class="badge bg-info-subtle text-dark">{{ pessoa.tipo }}</span></td>
+            <td>{{ pessoa.area_atuacao or '-' }}</td>
+            <td>{{ pessoa.email }}</td>
+            <td>
+              {% if pessoa.ativo %}
+                <span class="badge bg-success">ativo</span>
+              {% else %}
+                <span class="badge bg-secondary">inativo</span>
+              {% endif %}
+            </td>
+            <td class="text-end">
+              <a href="{{ url_for('editar_voluntario', pessoa_id=pessoa.id) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+              <form action="{{ url_for('alternar_status_voluntario', pessoa_id=pessoa.id) }}" method="POST" class="d-inline">
+                {% if pessoa.ativo %}
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Desativar</button>
+                {% else %}
+                  <button type="submit" class="btn btn-sm btn-outline-success">Reativar</button>
+                {% endif %}
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-muted">Nenhum membro cadastrado ainda.</p>
+  {% endif %}
+{% endblock %}

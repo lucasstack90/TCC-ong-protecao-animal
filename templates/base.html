@@ -11,9 +11,19 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('listar_animais') }}">🐾 Sistema ONG</a>
-      <div class="navbar-nav">
-        <a class="nav-link active" href="{{ url_for('listar_animais') }}">Animais</a>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="{{ url_for('listar_animais') }}">Animais</a>
+        <a class="nav-link" href="{{ url_for('listar_voluntarios') }}">Equipe</a>
+        <a class="nav-link" href="{{ url_for('listar_adotantes') }}">Adotantes</a>
+        <a class="nav-link" href="{{ url_for('listar_doadores') }}">Doadores</a>
+        <a class="nav-link" href="{{ url_for('listar_estoque') }}">Estoque</a>
       </div>
+      {% if current_user.is_authenticated %}
+        <div class="navbar-nav">
+          <span class="nav-link text-white-50">{{ current_user.nome }} ({{ current_user.tipo }})</span>
+          <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+        </div>
+      {% endif %}
     </div>
   </nav>
 
