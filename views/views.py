@@ -1,4 +1,4 @@
-from main import app
+from main.main import app
 from flask import render_template
 
 #Rotas, mas você pode adiconar mais rotas conforme as Pgs do site 
