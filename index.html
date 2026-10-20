@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244438">
+  <meta name="description" content="PAWSAFE — painel de gestão e proteção animal.">
+  <title>PAWSAFE | Dashboard</title>
+
+  <!-- Bootstrap 5 e Bootstrap Icons via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <a class="brand" href="#" aria-label="PAWSAFE página inicial">
+        <span class="brand-mark"><i class="bi bi-heart-pulse-fill"></i></span>
+        <span class="brand-copy">
+          <strong>PAWSAFE</strong>
+          <small>Gestão e proteção animal</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">MENU PRINCIPAL</div>
+      <nav class="nav flex-column sidebar-nav">
+        <a class="nav-link active" href="#dashboard"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span><i class="bi bi-chevron-right nav-chevron"></i></a>
+        <a class="nav-link" href="#animais"><i class="bi bi-paw"></i><span>Animais</span></a>
+        <a class="nav-link" href="#adocoes"><i class="bi bi-heart"></i><span>Adoções</span></a>
+        <a class="nav-link" href="#resgates"><i class="bi bi-house-heart"></i><span>Resgates</span></a>
+        <a class="nav-link" href="#voluntarios"><i class="bi bi-people"></i><span>Voluntários &amp; Equipe</span></a>
+        <a class="nav-link" href="#doacoes"><i class="bi bi-hand-heart"></i><span>Doações / Financeiro</span></a>
+        <a class="nav-link" href="#estoque"><i class="bi bi-box-seam"></i><span>Estoque</span></a>
+        <a class="nav-link" href="#relatorios"><i class="bi bi-file-earmark-bar-graph"></i><span>Relatório técnico</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a class="nav-link volunteer-link" href="#voluntarios"><i class="bi bi-box-arrow-up-right"></i><span>Link de voluntariado</span></a>
+        <button class="nav-link logout-link" type="button" id="logoutButton"><i class="bi bi-box-arrow-left"></i><span>Sair</span></button>
+        <div class="profile-mini">
+          <div class="avatar"><i class="bi bi-person-fill"></i></div>
+          <div class="profile-text"><strong>Renata Oliveira</strong><small>Administradora</small></div>
+          <button class="profile-more" type="button" aria-label="Opções do perfil"><i class="bi bi-three-dots-vertical"></i></button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <button class="mobile-menu btn-icon" id="menuToggle" type="button" aria-label="Abrir menu"><i class="bi bi-list"></i></button>
+        <div>
+          <div class="eyebrow">PAINEL ADMINISTRATIVO</div>
+          <h1>Visão geral</h1>
+          <p class="page-subtitle mb-0">Acompanhe as atividades da organização <span class="subtitle-dot">•</span> <span id="currentDate">Carregando data...</span></p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn-icon notification-button" type="button" aria-label="Notificações">
+            <i class="bi bi-bell"></i><span class="notification-dot"></span>
+          </button>
+          <div class="topbar-profile">
+            <div class="avatar avatar-large"><i class="bi bi-person-fill"></i></div>
+            <div class="profile-text"><strong>Renata Oliveira</strong><small>Administradora</small></div>
+            <i class="bi bi-chevron-down profile-caret"></i>
+          </div>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="Indicadores principais">
+        <article class="stat-card">
+          <div class="stat-icon icon-green"><i class="bi bi-paw"></i></div>
+          <div class="stat-content"><span class="stat-label">Animais cadastrados</span><strong class="stat-value">8</strong><span class="stat-foot"><i class="bi bi-arrow-up-right"></i> Total registrado</span></div>
+          <span class="stat-accent accent-green"></span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-sage"><i class="bi bi-heart"></i></div>
+          <div class="stat-content"><span class="stat-label">Disponíveis para adoção</span><strong class="stat-value">4</strong><span class="stat-foot">Aguardando um lar</span></div>
+          <span class="stat-accent accent-sage"></span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-orange"><i class="bi bi-house-heart"></i></div>
+          <div class="stat-content"><span class="stat-label">Resgates pendentes</span><strong class="stat-value">3</strong><span class="stat-foot">Precisam de acompanhamento</span></div>
+          <span class="stat-accent accent-orange"></span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-lilac"><i class="bi bi-people"></i></div>
+          <div class="stat-content"><span class="stat-label">Voluntários ativos</span><strong class="stat-value">4</strong><span class="stat-foot">Equipe cadastrada</span></div>
+          <span class="stat-accent accent-lilac"></span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-blue"><i class="bi bi-cash-coin"></i></div>
+          <div class="stat-content"><span class="stat-label">Doações neste mês</span><strong class="stat-value">R$ 1.550</strong><span class="stat-foot">Valor ilustrativo</span></div>
+          <span class="stat-accent accent-blue"></span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-green"><i class="bi bi-graph-up-arrow"></i></div>
+          <div class="stat-content"><span class="stat-label">Adoções concluídas</span><strong class="stat-value">1</strong><span class="stat-foot">No período selecionado</span></div>
+          <span class="stat-accent accent-green"></span>
+        </article>
+      </section>
+
+      <section class="charts-grid" aria-label="Gráficos do dashboard">
+        <article class="panel chart-panel adoption-chart-panel">
+          <div class="panel-heading">
+            <div><h2>Adoções por mês</h2><p>Histórico de adoções concluídas</p></div>
+            <button class="btn-icon panel-action" type="button" aria-label="Mais opções do gráfico"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="chart-wrap"><canvas id="adoptionsChart" aria-label="Gráfico de adoções por mês" role="img"></canvas></div>
+        </article>
+        <article class="panel chart-panel species-panel">
+          <div class="panel-heading">
+            <div><h2>Espécies cadastradas</h2><p>Distribuição dos animais</p></div>
+            <button class="btn-icon panel-action" type="button" aria-label="Mais opções do gráfico"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="species-content">
+            <div class="donut-wrap"><canvas id="speciesChart" aria-label="Gráfico de espécies cadastradas" role="img"></canvas><div class="donut-center"><strong>8</strong><span>animais</span></div></div>
+            <div class="legend-list">
+              <div><span class="legend-label"><i class="legend-dot dot-primary"></i>Cães</span><strong>4</strong></div>
+              <div><span class="legend-label"><i class="legend-dot dot-sage"></i>Gatos</span><strong>3</strong></div>
+              <div><span class="legend-label"><i class="legend-dot dot-terra"></i>Outros</span><strong>1</strong></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel status-panel">
+        <div class="panel-heading">
+          <div><h2>Distribuição por status</h2><p>Situação atual dos animais cadastrados</p></div>
+          <span class="section-icon"><i class="bi bi-sliders"></i></span>
+        </div>
+        <div class="status-list">
+          <span class="status-pill status-available"><i></i>Disponível <strong>4</strong></span>
+          <span class="status-pill status-adopted"><i></i>Adotado <strong>1</strong></span>
+          <span class="status-pill status-treatment"><i></i>Em tratamento <strong>1</strong></span>
+          <span class="status-pill status-rescued"><i></i>Resgatado <strong>1</strong></span>
+          <span class="status-pill status-temporary"><i></i>Lar temporário <strong>1</strong></span>
+        </div>
+      </section>
+
+      <section class="recent-grid">
+        <article class="panel recent-panel" id="adocoes">
+          <div class="panel-heading recent-heading">
+            <div class="heading-with-icon"><span class="table-heading-icon"><i class="bi bi-heart"></i></span><div><h2>Últimas adoções</h2><p>Movimentações recentes</p></div></div>
+            <a href="#adocoes" class="view-all">Ver todas <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="table-responsive">
+            <table class="table dashboard-table align-middle mb-0">
+              <thead><tr><th>Animal</th><th>Adotante</th><th>Data</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-dog"><i class="bi bi-paw-fill"></i></span><span><strong>Rex</strong><small>Macho · 3 anos</small></span></div></td><td>Carlos Mendes</td><td>31/03/2024</td><td><span class="badge-status badge-done">Concluída</span></td></tr>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-cat"><i class="bi bi-paw-fill"></i></span><span><strong>Luna</strong><small>Fêmea · 2 anos</small></span></div></td><td>Fernanda Lima</td><td>01/04/2024</td><td><span class="badge-status badge-review">Em análise</span></td></tr>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-dog"><i class="bi bi-paw-fill"></i></span><span><strong>Thor</strong><small>Macho · 1 ano</small></span></div></td><td>Juliana Alves</td><td>05/04/2024</td><td><span class="badge-status badge-done">Concluída</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel recent-panel" id="resgates">
+          <div class="panel-heading recent-heading">
+            <div class="heading-with-icon"><span class="table-heading-icon terra-icon"><i class="bi bi-house-heart"></i></span><div><h2>Resgates recentes</h2><p>Ocorrências registradas</p></div></div>
+            <a href="#resgates" class="view-all">Ver todos <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="table-responsive">
+            <table class="table dashboard-table align-middle mb-0">
+              <thead><tr><th>Animal / local</th><th>Data</th><th>Prioridade</th></tr></thead>
+              <tbody>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-dog"><i class="bi bi-paw-fill"></i></span><span><strong>Pipoca</strong><small>Av. Paulista, 1578</small></span></div></td><td>09/06/2024</td><td><span class="badge-status badge-high">Alta</span></td></tr>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-cat"><i class="bi bi-paw-fill"></i></span><span><strong>Mingau</strong><small>Parque Ibirapuera</small></span></div></td><td>08/06/2024</td><td><span class="badge-status badge-critical">Crítica</span></td></tr>
+                <tr><td><div class="animal-cell"><span class="animal-avatar animal-dog"><i class="bi bi-paw-fill"></i></span><span><strong>Mel</strong><small>Rua das Palmeiras, 320</small></span></div></td><td>05/06/2024</td><td><span class="badge-status badge-treatment">Em tratamento</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <footer class="page-footer"><span>© <span id="currentYear"></span> PAWSAFE</span><span>Gestão responsável, cuidado e proteção animal.</span></footer>
+    </main>
+  </div>
+
+  <!-- Os gráficos usam Chart.js; Bootstrap é usado para o layout e os ícones. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="js/deshboard.js"></script>
+</body>
+</html>
