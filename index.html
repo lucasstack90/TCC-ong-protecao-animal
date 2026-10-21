@@ -14,39 +14,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
-      <a class="brand" href="#" aria-label="PAWSAFE página inicial">
-        <span class="brand-mark"><i class="bi bi-heart-pulse-fill"></i></span>
-        <span class="brand-copy">
-          <strong>PAWSAFE</strong>
-          <small>Gestão e proteção animal</small>
-        </span>
-      </a>
-
-      <div class="sidebar-label">MENU PRINCIPAL</div>
-      <nav class="nav flex-column sidebar-nav">
-        <a class="nav-link active" href="#dashboard"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span><i class="bi bi-chevron-right nav-chevron"></i></a>
-        <a class="nav-link" href="#animais"><i class="bi bi-paw"></i><span>Animais</span></a>
-        <a class="nav-link" href="#adocoes"><i class="bi bi-heart"></i><span>Adoções</span></a>
-        <a class="nav-link" href="#resgates"><i class="bi bi-house-heart"></i><span>Resgates</span></a>
-        <a class="nav-link" href="#voluntarios"><i class="bi bi-people"></i><span>Voluntários &amp; Equipe</span></a>
-        <a class="nav-link" href="#doacoes"><i class="bi bi-wallet2"></i><span>Doações / Financeiro</span></a>
-        <a class="nav-link" href="#estoque"><i class="bi bi-box-seam"></i><span>Estoque</span></a>
-        <a class="nav-link" href="#relatorios"><i class="bi bi-file-earmark-bar-graph"></i><span>Relatório técnico</span></a>
-      </nav>
-
-      <div class="sidebar-bottom">
-        <a class="nav-link volunteer-link" href="#voluntarios"><i class="bi bi-box-arrow-up-right"></i><span>Link de voluntariado</span></a>
-        <button class="nav-link logout-link" type="button" id="logoutButton"><i class="bi bi-box-arrow-left"></i><span>Sair</span></button>
-        <div class="profile-mini">
-          <div class="avatar"><i class="bi bi-person-fill"></i></div>
-          <div class="profile-text"><strong>Renata Oliveira</strong><small>Administradora</small></div>
-          <button class="profile-more" type="button" aria-label="Opções do perfil"><i class="bi bi-three-dots-vertical"></i></button>
-        </div>
-      </div>
-    </aside>
-
-    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <div id="sidebarMount"></div>
 
     <main class="main-content" id="dashboard">
       <header class="topbar">
@@ -182,6 +150,7 @@
   <!-- Os gráficos usam Chart.js; Bootstrap é usado para o layout e os ícones. -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <script src="js/deshboard.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
